@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Must-Try in Palawan</title>
+  <style>
+    /* ✅ Keep the same pink header */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    
+    nav {
+      gap: 150px;
+      display: flex;
+      align-items: center;
+      background-color: pink;
+      padding: 15px;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      margin-right: 100px;
+    }
+
+    .search-container input {
+      padding: 7px;
+      margin-left: 350px;
+      border: 1px solid #ccc;
+    }
+
+    .search-container button {
+      padding: 7px;
+      border: none;
+      background-color: #ffd7d7;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-family: 'Times New Roman', Times, serif;
+      color: rgb(0, 0, 0);
+      padding: 5px 10px;
+    }
+
+    .nav-links a.active {
+      color: #777;
+      font-weight: bold;
+    }
+
+    /* ✅ Post container styling */
+    .post-container {
+  background: white;
+  width: 60%;
+  max-width: 700px;
+  margin: 40px auto;  /* This centers the whole post container */
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  text-align: center; /* Center text inside the post */
+}
+
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    .profile-pic {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .post-title {
+      font-family: 'Playfair display', serif;
+      font-size: 30px;
+      font-weight: normal;
+      margin-top: 10px;
+    }
+
+    .post-images {
+  display: flex;
+  flex-direction: column; /* 🔧 Stack images vertically */
+  align-items: center;     /* ✅ Center them horizontally in the container */
+  gap: 15px;
+  margin-top: 20px;
+}
+
+
+
+.post-image {
+  width: 100%;
+  max-width: 600px;        /* Limit image size for larger screens */
+  border-radius: 10px;
+  object-fit: cover;       /* Ensure images maintain aspect ratio */
+}
+
+    .post-content {
+      font-size: 20px;
+      font-family: 'Playfair display', serif;
+      color: #444;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: justify;
+    }
+
+    .post-views {
+      font-size: 14px;
+      color: #777;
+      margin-top: 20px;
+    }
+
+    span {
+      font-family: "Garamond", serif;
+      font-size: 22px;
+      color: #0f0101;
+    }
+
+    span {
+      font-family: "Georgia", serif;
+      font-size: 16px;
+      color: rgb(37, 32, 32);
+    }
+
+    header {
+      background: url('culturalheader.webp') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 50px;
+      font-style: italic;
+    }
+
+    
+    .blog-section {
+  display: flex;
+  flex-direction: column;  /* Added for vertical stacking */
+  align-items: center;     /* ✅ Fix alignment */
+  justify-content: center;
+  margin-top: 30px;
+}
+
+
+
+
+
+.blog-post {
+  width: 90%;
+  max-width: 700px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+.blog-post img {
+  width: 100%; /* Makes images adjust to the container width */
+  height: 450px; /* Ensures all images have the same height */
+  object-fit: cover; /* Maintains image proportions while cropping excess */
+  border-radius: 10px; /* Keeps rounded edges */
+}
+
+
+    .post-info {
+  display: flex;
+  align-items: center; /* Keeps everything aligned horizontally */
+}
+
+
+
+
+.post-info div {
+  display: flex;
+  flex-direction: column; /* Stacks "Trails Tails" and the date */
+  align-items: flex-start; /* Ensures text stays aligned */
+  margin-left: 5px; /* Adds slight spacing from the profile picture */
+}
+
+
+
+
+
+
+
+
+    .profile-pic {
+  width: 50px !important; /* Forces the width */
+  height: 50px !important; /* Ensures it's equal */
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+
+.post-date {
+  margin-top: -5px; /* Moves the date closer */
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #555;
+}
+
+
+
+
+
+
+
+
+    .post-preview {
+      font-size: 16px;
+      color: #444;
+      text-decoration: none;
+    }
+
+
+
+
+    .post-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+
+
+
+    .post-link:hover {
+      text-decoration: none;
+    }
+
+
+
+
+    .engagement-metrics {
+    display: flex;
+    gap: 15px;
+    margin-top: 8px;
+}
+
+
+
+
+.metric {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+
+
+
+
+.heart {
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+
+
+
+.heart.liked {
+    color: red;
+}
+
+
+.page-link {
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #444;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+
+
+.page-link:hover {
+    background: #ddd;
+}
+
+
+
+
+.page-link.active {
+    background: pink;
+    color: white;
+    font-weight: bold;
+}
+
+
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+  margin:  auto;
+}
+
+
+.blog-posts-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ✅ Centers the posts horizontally */
+}
+
+
+.blog-post {
+  width: 60%;
+  margin-bottom: 40px;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+
+  <!-- ✅ NAVIGATION BAR -->
+  <nav>
+    <div class="search-container">
+      <input type="text" placeholder="Search..." />
+      <button>Search</button>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="must_try.html">Must-Try</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="eats.html">Eats</a>
+      <a href="cultural_encounters.html">Cultural Encounters</a>
+    </div>
+  </nav>
+
+  
+  <header>
+    <h5> Beyond Borders: Stories of Cultural Discovery </h5>
+    <h2> Traveling is more than places—it's about people, traditions, and the connections we make. Welcome to my cultural journey!  </h2>
+  </header>
+
+
+<!--   9  FLAMENCO-->
+<div class="blog-section">
+  <div class="blog-posts-wrapper">
+   <div class="blog-post">
+    <a href="flamenco.html" class="post-link" id="flamenco-preview-post-link">
+      <img src="flamenco.jpg" alt= "Flamenco Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">July 30</h7>
+      </div>
+    </div>
+
+
+    <a href="flamenco.html" class="post-link combined-link">
+      <h2 class="hoverable"> Feel the Soul of Spain: The Flamenco Experience</h2>
+      <p class="post-preview hoverable">
+        Feel the soul of Spain through flamenco—not just a dance, but an expression
+        <br><br>
+        of raw human emotion woven into music, rhythm, and movement. This passionate art form was born...
+      </p>
+    </a>
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="flamenco-view-count">0</span></span>
+      <span class="metric">
+        <span id="flamenco-heart-icon" class="heart">♡</span> <span id="flamenco-like-count">0</span>
+      </span>
+     </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+
+  .hoverable {
+    color: black;
+  }
+
+
+  .heart.liked {
+    color: red;
+  }
+
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'flamenco-view-count';
+    const likeKey = 'flamenco-liked';
+    const likeCountKey = 'flamenco-like-count';
+
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("flamenco-view-count").innerText = viewCount;
+
+
+    document.getElementById('flamenco-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+
+    // Likes
+    const heart = document.getElementById("flamenco-heart-icon");
+    const likeCountElem = document.getElementById("flamenco-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+<!-- 12  GREEK CULTURAL -->
+
+
+<div class="blog-section">
+  <div class="blog-posts-wrapper">
+   <div class="blog-post">
+    <a href="culturalgreece.html" class="post-link" id="foodsingreece-preview-post-link">
+      <img src="rebetiko.webp" alt= "Cultural Greece Image" class="clickable-preview" />
+    </a>
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">September 17</h7>
+      </div>
+    </div>
+
+    <a href="culturalgreece.html" class="post-link combined-link">
+      <h2 class="hoverable"> The Rhythms of Greece: Traditional Dance & Music </h2>
+      <p class="post-preview hoverable">
+        From the lively beats of Syrtos to the soul-stirring sounds of Rebetiko, Greece’s traditional
+        <br><br>
+        music and dance offer a window into its rich cultural soul...
+      </p>
+    </a>
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="culturalgreece-view-count">0</span></span>
+      <span class="metric">
+        <span id="culturalgreece-heart-icon" class="heart">♡</span> <span id="culturalgreece-like-count">0</span>
+      </span>
+     </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+  .hoverable {
+    color: black;
+  }
+
+  .heart.liked {
+    color: red;
+  }
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'culturalgreece-view-count';
+    const likeKey = 'culturalgreece-liked';
+    const likeCountKey = 'culturalgreece-like-count';
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("culturalgreece-view-count").innerText = viewCount;
+
+    document.getElementById('culturalgreece-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+    // Likes
+    const heart = document.getElementById("culturalgreece-heart-icon");
+    const likeCountElem = document.getElementById("culturalgreece-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+<!-- 14 DUBAI CULTURAL-->
+
+
+<div class="blog-section">
+  <div class="blog-posts-wrapper">
+   <div class="blog-post">
+    <a href="dubai_culture.html" class="post-link" id="dubai_culture-preview-post-link">
+      <img src="fahidi.jpg" alt= "Dubai Image" class="clickable-preview" />
+    </a>
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">November 22</h7>
+      </div>
+    </div>
+
+    <a href="dubai_culture.html" class="post-link combined-link">
+      <h2 class="hoverable"> Cultural Encounters in Dubai: Traditions & Heritage </h2>
+      <p class="post-preview hoverable">
+        Dubai may be known for luxury, but its deep-rooted traditions and heritage
+        <br><br>
+        make it a fascinating place for...
+      </p>
+    </a>
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="dubai_culture-view-count">0</span></span>
+      <span class="metric">
+        <span id="dubai_culture-heart-icon" class="heart">♡</span> <span id="dubai_culture-like-count">0</span>
+      </span>
+     </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+  .hoverable {
+    color: black;
+  }
+
+  .heart.liked {
+    color: red;
+  }
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'dubai_culture-view-count';
+    const likeKey = 'dubai_culture-liked';
+    const likeCountKey = 'dubai_culture-like-count';
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("dubai_culture-view-count").innerText = viewCount;
+
+    document.getElementById('dubai_culture-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+    // Likes
+    const heart = document.getElementById("dubai_culture-heart-icon");
+    const likeCountElem = document.getElementById("dubai_culture-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      /** ✅ Highlight Active Navigation Link */
+      const navLinks = document.querySelectorAll(".nav-links a");
+  
+      // ✅ Get current page URL
+      const currentPage = window.location.pathname.split("/").pop();
+  
+      navLinks.forEach(link => {
+          // ✅ Remove "active" class from all links first
+          link.classList.remove("active");
+  
+          // ✅ Check if the link matches the current page
+          if (link.getAttribute("href") === currentPage) {
+              link.classList.add("active");
+          }
+      });
+  
+      /** ✅ Existing Features */
+      // View count, likes, pagination logic...
+  
+      /** ✅ Track and show view count */
+      let viewCount = localStorage.getItem("view-count") || 0;
+      viewCount++;
+      localStorage.setItem("view-count", viewCount);
+      const viewCountEl = document.getElementById("view-count");
+      if (viewCountEl) viewCountEl.innerText = viewCount;
+  
+      /** ✅ Interactive Likes */
+      const heartIcon = document.getElementById("heart-icon");
+      let liked = localStorage.getItem("liked") === "true";
+  
+      if (liked && heartIcon) {
+          heartIcon.classList.add("liked");
+      }
+  
+      if (heartIcon) {
+          heartIcon.addEventListener("click", function () {
+              liked = !liked;
+              localStorage.setItem("liked", liked);
+              heartIcon.classList.toggle("liked");
+  
+              const likeCountEl = document.getElementById("like-count");
+              let likeCount = parseInt(likeCountEl.innerText);
+              likeCountEl.innerText = liked ? likeCount + 1 : likeCount - 1;
+          });
+      }
+  
+      // ✅ Scroll to top of the page
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  </script>
+  
+  
+</body>
+
+
+</body>
+</html>

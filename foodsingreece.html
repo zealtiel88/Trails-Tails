@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Must-Try in Palawan</title>
+  <style>
+    /* ✅ Keep the same pink header */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    
+    nav {
+      gap: 150px;
+      display: flex;
+      align-items: center;
+      background-color: pink;
+      padding: 15px;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      margin-right: 100px;
+    }
+
+    .search-container input {
+      padding: 7px;
+      margin-left: 350px;
+      border: 1px solid #ccc;
+    }
+
+    .search-container button {
+      padding: 7px;
+      border: none;
+      background-color: #ffd7d7;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-family: 'Times New Roman', Times, serif;
+      color: rgb(0, 0, 0);
+      padding: 5px 10px;
+    }
+
+    .nav-links a.active {
+      color: #777;
+      font-weight: bold;
+    }
+
+    /* ✅ Post container styling */
+    .post-container {
+  background: white;
+  width: 60%;
+  max-width: 700px;
+  margin: 40px auto;  /* This centers the whole post container */
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  text-align: center; /* Center text inside the post */
+}
+
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    .profile-pic {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .post-title {
+      font-family: 'Playfair display', serif;
+      font-size: 30px;
+      font-weight: normal;
+      margin-top: 10px;
+    }
+
+    .post-images {
+  display: flex;
+  flex-direction: column; /* 🔧 Stack images vertically */
+  align-items: center;     /* ✅ Center them horizontally in the container */
+  gap: 15px;
+  margin-top: 20px;
+}
+
+
+
+.post-image {
+  width: 100%;
+  max-width: 600px;        /* Limit image size for larger screens */
+  border-radius: 10px;
+  object-fit: cover;       /* Ensure images maintain aspect ratio */
+}
+
+    .post-content {
+      font-size: 20px;
+      font-family: 'Playfair display', serif;
+      color: #444;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: justify;
+    }
+
+    .post-views {
+      font-size: 14px;
+      color: #777;
+      margin-top: 20px;
+    }
+
+    span {
+      font-family: "Garamond", serif;
+      font-size: 22px;
+      color: #0f0101;
+    }
+
+    span {
+      font-family: "Georgia", serif;
+      font-size: 16px;
+      color: rgb(37, 32, 32);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Navigation Bar -->
+  <nav>
+    <div class="search-container">
+      <input type="text" placeholder="Search..." />
+      <button>Search</button>
+    </div>
+    <div class="nav-links">
+      <a href="trailstails.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="must_try.html" class="active">Must-Try</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="eats.html">Eats</a>
+      <a href="cultural_encounters.html">Cultural Encounters</a>
+    </div>
+  </nav>
+
+  <!-- ✅ Post Container -->
+  <div class="post-container">
+    <div class="post-header">
+      <img src="profile1.png" alt="Profile" class="profile-pic">
+      <div>
+        <span>Trails Tails</span> • <span> September 4  </span>
+      </div>
+    </div>
+
+    <h2 class="post-title" id="actual-title"> A Taste of Greece: From Savory Souvlaki to Sweet Baklava — Exploring the Heart of Greek Cuisine </h2>
+
+
+    <!-- Preview Image -->
+     
+    <img src="baklava.jpg" alt="Foods in Greece" class="post-image" id="actual-image">
+
+
+    <div class="post-images">
+      <img src="souvlaki.jpeg" alt="Foods in Greece" class="post-image" id="actual-image">
+    </div>
+
+    <p class="post-content">
+        Greek cuisine is more than just a meal—it's a celebration of life, community, and rich traditions. From the sun-soaked 
+        islands to the mountainous mainland, Greece’s culinary offerings are as diverse as its landscapes. 
+        <br><br>
+        Explore bustling markets filled with olives, feta, and herbs. Step inside family tavernas for grilled souvlaki, 
+        creamy moussaka, and cool, refreshing tzatziki. Sip ouzo by the sea, enjoy handmade spanakopita, and end with 
+        honey-drenched baklava that melts in your mouth.
+        <br><br>
+        Whether you're a passionate foodie or a curious traveler, this flavorful journey into Greek cuisine will 
+        leave you inspired—and hungry for more.
+    </p>    
+
+    <!-- Engagement Metrics -->
+<div class="engagement-metrics">
+  <span class="metric">👁 <span id="foodsingreece-view-count">0</span></span>
+  <span class="metric">
+    <span id="foodsingreece-heart-icon" class="heart">♡</span> <span id="foodsingreece-like-count">0</span>
+  </span>
+</div>
+
+<style>
+  .heart.liked {
+    color: red;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'foodsingreece-view-count';
+    const likeKey = 'foodsingreece-liked';
+    const likeCountKey = 'foodsingreece-like-count';
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    viewCount++;
+    localStorage.setItem(viewKey, viewCount);
+    document.getElementById("foodsingreece-view-count").textContent = viewCount;
+
+    // Likes
+    const heart = document.getElementById("foodsingreece-heart-icon");
+    const likeCountElem = document.getElementById("foodsingreece-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.textContent = likeCount;
+
+    heart.addEventListener("click", function () {
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount);
+      likeCountElem.textContent = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+</body>
+</html>

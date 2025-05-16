@@ -1,0 +1,2392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trails Tails</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+  
+    nav {
+      gap: 150px;
+      display: flex;
+      align-items: center;
+      background-color: pink;
+      padding: 15px;
+    }
+  
+    .search-container {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+      width: 100%;
+    }
+  
+    .search-container input {
+      padding: 7px;
+      width: 70%;
+      border: 1px solid #ccc;
+    }
+  
+    .search-container button {
+      padding: 7px;
+      border: none;
+      background-color: #ffd7d7;
+      color: white;
+      cursor: pointer;
+    }
+  
+    .search-container button:hover {
+      background-color: #777;
+    }
+  
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+  
+    nav a {
+      text-decoration: none;
+      font-family: 'Times New Roman', Times, serif;
+      color: rgb(0, 0, 0);
+      padding: 5px 10px;
+    }
+  
+    nav a:hover {
+      background-color: #555;
+    }
+  
+    .nav-links a.active {
+      color: #777;
+      font-weight: bold;
+    }
+  
+    header {
+      background: url('header.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 50px;
+      font-style: italic;
+    }
+  
+    .preview-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 50px;
+      padding: 0 10px;
+    }
+  
+    .explore-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+  
+    .preview-cards {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+  
+    .preview-card {
+      position: relative;
+      width: 90%;
+      max-width: 300px;
+      height: 200px;
+      overflow: hidden;
+      text-align: center;
+    }
+  
+    .preview-card a {
+      display: block;
+      text-decoration: none;
+      color: white;
+    }
+  
+    .preview-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease-in-out;
+    }
+  
+    .preview-card a:hover img {
+      transform: scale(1.05);
+    }
+  
+    .preview-card h3 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+    }
+  
+    .blog-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+    }
+  
+    .blog-post {
+      width: 90%;
+      max-width: 700px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+  
+    .blog-post img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  
+    .post-info {
+      display: flex;
+      align-items: center;
+    }
+  
+    .post-info div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 5px;
+    }
+  
+    .profile-pic {
+      width: 50px !important;
+      height: 50px !important;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+  
+    .post-date {
+      margin-top: -5px;
+      font-size: 12px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: #555;
+    }
+  
+    .post-preview {
+      font-size: 16px;
+      color: #444;
+      text-decoration: none;
+    }
+  
+    .post-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+  
+    .post-link:hover {
+      text-decoration: none;
+    }
+  
+    .engagement-metrics {
+      display: flex;
+      gap: 15px;
+      margin-top: 8px;
+    }
+  
+    .metric {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #555;
+    }
+  
+    .heart {
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+  
+    .heart.liked {
+      color: red;
+    }
+  
+    .pagination {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      gap: 5px;
+    }
+  
+    .page-link {
+      padding: 8px 12px;
+      margin: 0 5px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #444;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+  
+    .page-link:hover {
+      background: #ddd;
+    }
+  
+    .page-link.active {
+      background: pink;
+      color: white;
+      font-weight: bold;
+    }
+  
+    .center-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: auto;
+    }
+  
+    .blog-posts-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    /* ✅ Responsive design for mobile */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
+        text-align: center;
+      }
+  
+      .search-container {
+        flex-direction: column;
+        width: 100%;
+      }
+  
+      .search-container input {
+        margin: 10px 0;
+        width: 80%;
+      }
+  
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+  
+      header {
+        padding: 30px 10px;
+        font-size: 16px;
+      }
+  
+      .preview-cards {
+        flex-direction: column;
+        gap: 20px;
+      }
+  
+      .preview-card {
+        width: 90%;
+        height: auto;
+      }
+  
+      .post-info {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+  
+      .post-info div {
+        margin-left: 0;
+        margin-top: 5px;
+      }
+  
+      .pagination {
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+  
+      .blog-post {
+        width: 95%;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+
+
+
+
+  <!-- ✅ NAVIGATION BAR -->
+  <nav>
+    <div class="search-container">
+      <input type="text" placeholder="Search..." />
+      <button>Search</button>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="must_try.html">Must-Try</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="eats.html">Eats</a>
+      <a href="cultural_encounters.html">Cultural Encounters</a>
+    </div>
+  </nav>
+
+
+
+
+  <header>
+    <h5>Welcome to Trails Tails</h5>
+    <h2>Let’s embark together on a world of discovery where every trail leads to a tale.</h2>
+  </header>
+ 
+  <div id="home">
+    <div class="preview-section">
+      <h2 class="explore-title">Explore the Stories</h2>
+      <div class="preview-cards">
+        <div class="preview-card">
+          <a href="destinations.html">
+            <img src="nature_trails.jpg" alt="Nature Trails" />
+            <h3>Nature Trails</h3>
+          </a>
+        </div>
+        <div class="preview-card">
+          <a href="eats.html">
+            <img src="eats.jpg" alt="Eats" />
+            <h3>Eats</h3>
+          </a>
+        </div>
+        <div class="preview-card">
+          <a href="cultural_encounters.html">
+            <img src="cultural.jpg" alt="Cultural Encounters" />
+            <h3>Cultural Encounters</h3>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  1  MUST TRY IN PALAWAN-->
+ 
+<div class="blog-section" data-page="1">
+  <div class="blog-post">
+    <a href="palawan-must-try.html" class="post-link" id="must-try-preview-post-link">
+      <img src="palawan.jpg" alt="Must Try Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date"> April 30</h7>
+      </div>
+    </div>
+
+
+    <a href="palawan-must-try.html" class="post-link combined-link">
+      <h2 class="hoverable">Must-Try in Palawan</h2>
+      <p class="post-preview hoverable">
+        Island Hopping: Explore El Nido's famous lagoons and Corons's pristine Islands like Malcapuya and Banana Island.
+        <br><br>
+        Snorkeling and Diving...
+      </p>
+    </a>
+      
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="must-try-view-count">0</span></span>
+      <span class="metric">
+        <span id="must-try-heart-icon" class="heart">♡</span> <span id="must-try-like-count">0</span>
+      </span>
+    </div>
+  </div>
+</div>
+      <style>
+        .combined-link {
+          text-decoration: none;
+          color: inherit;
+          display: block;
+        }
+      
+      
+        .combined-link:hover .hoverable {
+          color: rgb(247, 109, 109);
+          transition: color 0.2s ease-in-out;
+        }
+      
+      
+        .hoverable {
+          color: black;
+        }
+      
+      
+        .heart.liked {
+          color: red;
+        }
+      
+      
+        .clickable-preview {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+      
+      
+        .profile-pic {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin-right: 8px;
+        }
+      </style>
+      
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const viewKey = 'must-try-view-count';
+          const likeKey = 'must-try-liked';
+          const likeCountKey = 'must-try-like-count';
+      
+      
+          // Views
+          let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+          document.getElementById("must-try-view-count").innerText = viewCount;
+      
+      
+          document.getElementById('must-try-preview-post-link').addEventListener('click', function () {
+            viewCount++;
+            localStorage.setItem(viewKey, viewCount);
+          });
+      
+      
+          // Likes
+          const heart = document.getElementById("must-try-heart-icon");
+          const likeCountElem = document.getElementById("must-try-like-count");
+          let liked = localStorage.getItem(likeKey) === 'true';
+          let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+      
+      
+          if (liked) heart.classList.add("liked");
+          likeCountElem.innerText = likeCount;
+      
+      
+          heart.addEventListener("click", function (e) {
+            e.preventDefault();
+            liked = !liked;
+            heart.classList.toggle("liked");
+            likeCount += liked ? 1 : -1;
+            likeCount = Math.max(0, likeCount); // Avoid negatives
+            likeCountElem.innerText = likeCount;
+            localStorage.setItem(likeKey, liked);
+            localStorage.setItem(likeCountKey, likeCount);
+          });
+        });
+      </script>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 2  ISLAND BLISS POST -->
+<div class="blog-section" data-page="1">
+  <div class="blog-post">
+    <a href="palawan.html" class="post-link" id="island-preview-post-link">
+      <img src="palawan1.jpg" alt="Island Bliss Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">May 9</h7>
+      </div>
+    </div>
+
+
+    <a href="palawan.html" class="post-link combined-link">
+      <h2 class="hoverable">Island Bliss: Tales from My Palawan Tails</h2>
+      <p class="post-preview hoverable">
+        Palawan, often called the Last Frontier of the Philippines, is a true paradise that exceeded all my expectations.
+        <br><br>
+        From its pristine...
+      </p>
+    </a>
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="island-view-count">0</span></span>
+      <span class="metric">
+        <span id="island-heart-icon" class="heart">♡</span> <span id="island-like-count">0</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+
+  .hoverable {
+    color: black;
+  }
+
+
+  .heart.liked {
+    color: red;
+  }
+
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'islandbliss-view-count';
+    const likeKey = 'islandbliss-liked';
+    const likeCountKey = 'islandbliss-like-count';
+
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("island-view-count").innerText = viewCount;
+
+
+    document.getElementById('island-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+
+    // Likes
+    const heart = document.getElementById("island-heart-icon");
+    const likeCountElem = document.getElementById("island-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--   3   WANDERING IN JAPAN-->
+<div class="blog-section" data-page="1">
+  <div class="blog-post">
+    <a href="journeyinjapan.html" class="post-link" id="wanderingjapan-preview-post-link">
+      <img src="wanderingjapan.webp" alt= "Wadering Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">June 15</h7>
+      </div>
+    </div>
+
+
+    <a href="journeyinjapan.html" class="post-link combined-link">
+      <h2 class="hoverable">Wandering Through Wonders: My Journey in Japan</h2>
+      <p class="post-preview hoverable">
+        a land of contrasts where ancient traditions meet cutting-edge modernity, is a traveler’s
+        <br><br>
+        dream come true. From serene temples to bustling cities...
+      </p>
+    </a>
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="wandering-view-count">0</span></span>
+      <span class="metric">
+        <span id="wandering-heart-icon" class="heart">♡</span> <span id="wandering-like-count">0</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+
+  .hoverable {
+    color: black;
+  }
+
+
+  .heart.liked {
+    color: red;
+  }
+
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'wandering-view-count';
+    const likeKey = 'wandering-liked';
+    const likeCountKey = 'wandering-like-count';
+
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("wandering-view-count").innerText = viewCount;
+
+
+    document.getElementById('wanderingjapan-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+
+    // Likes
+    const heart = document.getElementById("wandering-heart-icon");
+    const likeCountElem = document.getElementById("wandering-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 4  ALHAMBRA-->
+<div class="blog-section" data-page="1">
+  <div class="blog-post">
+    <a href="alhambra.html" class="post-link" id="alhambra-preview-post-link">
+      <img src="alhambra.jpg" alt= "Alhambra Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">June 28</h7>
+      </div>
+    </div>
+
+
+    <a href="alhambra.html" class="post-link combined-link">
+      <h2 class="hoverable">Alhambra in Granada</h2>
+      <p class="post-preview hoverable">
+        Visit the Alhambra in Granada: This architectural masterpiece is a must-see, offering a stunning glimpse...
+      </p>
+    </a>
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="alhambra-view-count">0</span></span>
+      <span class="metric">
+        <span id="alhambra-heart-icon" class="heart">♡</span> <span id="alhambra-like-count">0</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+
+  .hoverable {
+    color: black;
+  }
+
+
+  .heart.liked {
+    color: red;
+  }
+
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'alhambra-view-count';
+    const likeKey = 'alhambra-liked';
+    const likeCountKey = 'alhambra-like-count';
+
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("alhambra-view-count").innerText = viewCount;
+
+
+    document.getElementById('alhambra-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+
+    // Likes
+    const heart = document.getElementById("alhambra-heart-icon");
+    const likeCountElem = document.getElementById("alhambra-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 5  EATS IN JAPAN-->
+<div class="blog-section" data-page="1">
+  <div class="blog-post">
+    <a href="eatsinjapan.html" class="post-link" id="eatsinjapan-preview-post-link">
+      <img src="eatsinjapan.jpg" alt= "Eats in Japan Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">June 28</h7>
+      </div>
+    </div>
+
+
+    <a href="eatsinjapan.html" class="post-link combined-link">
+      <h2 class="hoverable">Eats in Japan</h2>
+      <p class="post-preview hoverable">
+        Okonomiyaki: A savory pancake filled with cabbage, meat, and seafood,
+        <br><br>
+        popular in Hiroshima and Osaka. Wagashi: Traditional Japanese...
+      </p>
+    </a>
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="eatsinjapan-view-count">0</span></span>
+      <span class="metric">
+        <span id="eatsinjapan-heart-icon" class="heart">♡</span> <span id="eatsinjapan-like-count">0</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+
+  .hoverable {
+    color: black;
+  }
+
+
+  .heart.liked {
+    color: red;
+  }
+
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'eatsinjapan-view-count';
+    const likeKey = 'eatsinjapan-liked';
+    const likeCountKey = 'eatsinjapan-like-count';
+
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("eatsinjapan-view-count").innerText = viewCount;
+
+
+    document.getElementById('eatsinjapan-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+
+    // Likes
+    const heart = document.getElementById("eatsinjapan-heart-icon");
+    const likeCountElem = document.getElementById("eatsinjapan-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 6  MUST TRY IN JAPAN-->
+<div class="blog-section" data-page="1">
+  <div class="blog-post">
+    <a href="must-try-in-japan.html" class="post-link" id="tryinjapan-preview-post-link">
+      <img src="onsen.webp" alt= "Must-Try in Japan Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">July 1</h7>
+      </div>
+    </div>
+
+
+    <a href="must-try-in-japan.html" class="post-link combined-link">
+      <h2 class="hoverable">Must-Try in Japan</h2>
+      <p class="post-preview hoverable">
+        Experience Onsen (Hot Springs): Relax in a natural hot spring bath, like those in Hakone or Beppu, for a rejuvenating
+        <br><br>
+        experience. Cherry...
+      </p>
+    </a>
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="tryinjapan-view-count">0</span></span>
+      <span class="metric">
+        <span id="tryinjapan-heart-icon" class="heart">♡</span> <span id="tryinjapan-like-count">0</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+
+  .hoverable {
+    color: black;
+  }
+
+
+  .heart.liked {
+    color: red;
+  }
+
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'tryinjapan-view-count';
+    const likeKey = 'tryinjapan-liked';
+    const likeCountKey = 'tryinjapan-like-count';
+
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("tryinjapan-view-count").innerText = viewCount;
+
+
+    document.getElementById('tryinjapan-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+
+    // Likes
+    const heart = document.getElementById("tryinjapan-heart-icon");
+    const likeCountElem = document.getElementById("tryinjapan-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 7  VIVA ESPANA-->
+<div class="blog-section" data-page="2" style="display: none;">
+  <div class="blog-posts-wrapper">
+   <div class="blog-post">
+    <a href="espana.html" class="post-link" id="espana-preview-post-link">
+      <img src="vivaespana.webp" alt= "Viva Espana Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">July 1</h7>
+      </div>
+    </div>
+
+
+    <a href="espana.html" class="post-link combined-link">
+      <h2 class="hoverable">Viva Espana: My Journey Through Spain's Vibrant Trails</h2>
+      <p class="post-preview hoverable">
+        Spain—where history, culture, and passion collide in a vivid tapestry of life. My journey through this enchanting country
+        <br><br>
+        was nothing short of magical. Let me share with you some of my most unforgettable moments, along
+        <br><br>
+        with must-try experiences that made my time here extraordinary. My Experience in Spain The moment I set foot...
+      </p>
+    </a>
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="espana-view-count">0</span></span>
+      <span class="metric">
+        <span id="espana-heart-icon" class="heart">♡</span> <span id="espana-like-count">0</span>
+      </span>
+     </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+
+  .hoverable {
+    color: black;
+  }
+
+
+  .heart.liked {
+    color: red;
+  }
+
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'espana-view-count';
+    const likeKey = 'espana-liked';
+    const likeCountKey = 'espana-like-count';
+
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("espana-view-count").innerText = viewCount;
+
+
+    document.getElementById('espana-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+
+    // Likes
+    const heart = document.getElementById("espana-heart-icon");
+    const likeCountElem = document.getElementById("espana-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--  8  EATS IN SPAIN-->
+    <div class="blog-section" data-page="2" style="display: none;">
+      <div class="blog-posts-wrapper">
+       <div class="blog-post">
+        <a href="eatsinspain.html" class="post-link" id="spain-preview-post-link">
+          <img src="eatsinspain.jpg" alt= "Eats in Spain Image" class="clickable-preview" />
+        </a>
+   
+        <div class="post-info">
+          <img src="profile1.png" alt="Profile" class="profile-pic" />
+          <div>
+            <h5>Trails Tails</h5>
+            <h7 class="post-date">July 10</h7>
+          </div>
+        </div>
+   
+        <a href="eatsinspain.html" class="post-link combined-link">
+          <h2 class="hoverable">Tapas and Food Culture Dining in Spain</h2>
+          <p class="post-preview hoverable">
+            Tapas and Food Culture Dining in Spain is a communal affair, with tapas culture taking center stage.
+          </p>
+        </a>
+   
+        <!-- ✅ Engagement Metrics -->
+        <div class="engagement-metrics">
+          <span class="metric">👁 <span id="spain-view-count">0</span></span>
+          <span class="metric">
+            <span id="spain-heart-icon" class="heart">♡</span> <span id="spain-like-count">0</span>
+          </span>
+         </div>
+        </div>
+      </div>
+    </div>
+   
+    <style>
+      .combined-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+   
+      .combined-link:hover .hoverable {
+        color: rgb(247, 109, 109);
+        transition: color 0.2s ease-in-out;
+      }
+   
+      .hoverable {
+        color: black;
+      }
+   
+      .heart.liked {
+        color: red;
+      }
+   
+      .clickable-preview {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+   
+      .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+    </style>
+   
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const viewKey = 'spain-view-count';
+        const likeKey = 'spain-liked';
+        const likeCountKey = 'spain-like-count';
+   
+        // Views
+        let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+        document.getElementById("spain-view-count").innerText = viewCount;
+   
+        document.getElementById('spain-preview-post-link').addEventListener('click', function () {
+          viewCount++;
+          localStorage.setItem(viewKey, viewCount);
+        });
+   
+        // Likes
+        const heart = document.getElementById("spain-heart-icon");
+        const likeCountElem = document.getElementById("spain-like-count");
+        let liked = localStorage.getItem(likeKey) === 'true';
+        let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+   
+        if (liked) heart.classList.add("liked");
+        likeCountElem.innerText = likeCount;
+   
+        heart.addEventListener("click", function (e) {
+          e.preventDefault();
+          liked = !liked;
+          heart.classList.toggle("liked");
+          likeCount += liked ? 1 : -1;
+          likeCount = Math.max(0, likeCount); // Avoid negatives
+          likeCountElem.innerText = likeCount;
+          localStorage.setItem(likeKey, liked);
+          localStorage.setItem(likeCountKey, likeCount);
+        });
+      });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--   9  FLAMENCO-->
+<div class="blog-section" data-page="2" style="display: none;">
+  <div class="blog-posts-wrapper">
+   <div class="blog-post">
+    <a href="flamenco.html" class="post-link" id="flamenco-preview-post-link">
+      <img src="flamenco.jpg" alt= "Flamenco Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">July 30</h7>
+      </div>
+    </div>
+
+
+    <a href="flamenco.html" class="post-link combined-link">
+      <h2 class="hoverable"> Feel the Soul of Spain: The Flamenco Experience</h2>
+      <p class="post-preview hoverable">
+        Feel the soul of Spain through flamenco—not just a dance, but an expression
+        <br><br>
+        of raw human emotion woven into music, rhythm, and movement. This passionate art form was born...
+      </p>
+    </a>
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="flamenco-view-count">0</span></span>
+      <span class="metric">
+        <span id="flamenco-heart-icon" class="heart">♡</span> <span id="flamenco-like-count">0</span>
+      </span>
+     </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+
+  .hoverable {
+    color: black;
+  }
+
+
+  .heart.liked {
+    color: red;
+  }
+
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'flamenco-view-count';
+    const likeKey = 'flamenco-liked';
+    const likeCountKey = 'flamenco-like-count';
+
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("flamenco-view-count").innerText = viewCount;
+
+
+    document.getElementById('flamenco-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+
+    // Likes
+    const heart = document.getElementById("flamenco-heart-icon");
+    const likeCountElem = document.getElementById("flamenco-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+   
+   
+
+
+   <!--  10   SUNSET GREECE-->
+   <div class="blog-section" data-page="2" style="display: none;">
+    <div class="blog-posts-wrapper">
+     <div class="blog-post">
+      <a href="sunsetgreece.html" class="post-link" id="sunset-preview-post-link">
+        <img src="greece.jpg" alt= "Sunset Greece Image" class="clickable-preview" />
+      </a>
+ 
+      <div class="post-info">
+        <img src="profile1.png" alt="Profile" class="profile-pic" />
+        <div>
+          <h5>Trails Tails</h5>
+          <h7 class="post-date">August 27</h7>
+        </div>
+      </div>
+ 
+      <a href="sunsetgreece.html" class="post-link combined-link">
+        <h2 class="hoverable">Chasing Sunsets in Greece: Discovering the Most Breathtaking Views</h2>
+        <p class="post-preview hoverable">
+          From Santorini’s fiery skies to Crete’s golden coastlines, Greece offers some of the most
+          <br><br>
+          unforgettable sunset moments. Let’s explore these stunning twilight destinations...
+        </p>
+      </a>
+ 
+      <!-- ✅ Engagement Metrics -->
+      <div class="engagement-metrics">
+        <span class="metric">👁 <span id="sunset-view-count">0</span></span>
+        <span class="metric">
+          <span id="sunset-heart-icon" class="heart">♡</span> <span id="sunset-like-count">0</span>
+        </span>
+       </div>
+      </div>
+    </div>
+  </div>
+ 
+  <style>
+    .combined-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+ 
+    .combined-link:hover .hoverable {
+      color: rgb(247, 109, 109);
+      transition: color 0.2s ease-in-out;
+    }
+ 
+    .hoverable {
+      color: black;
+    }
+ 
+    .heart.liked {
+      color: red;
+    }
+ 
+    .clickable-preview {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+ 
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+  </style>
+ 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const viewKey = 'sunset-view-count';
+      const likeKey = 'sunset-liked';
+      const likeCountKey = 'sunset-like-count';
+ 
+      // Views
+      let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+      document.getElementById("sunset-view-count").innerText = viewCount;
+ 
+      document.getElementById('sunset-preview-post-link').addEventListener('click', function () {
+        viewCount++;
+        localStorage.setItem(viewKey, viewCount);
+      });
+ 
+      // Likes
+      const heart = document.getElementById("sunset-heart-icon");
+      const likeCountElem = document.getElementById("sunset-like-count");
+      let liked = localStorage.getItem(likeKey) === 'true';
+      let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+ 
+      if (liked) heart.classList.add("liked");
+      likeCountElem.innerText = likeCount;
+ 
+      heart.addEventListener("click", function (e) {
+        e.preventDefault();
+        liked = !liked;
+        heart.classList.toggle("liked");
+        likeCount += liked ? 1 : -1;
+        likeCount = Math.max(0, likeCount); // Avoid negatives
+        likeCountElem.innerText = likeCount;
+        localStorage.setItem(likeKey, liked);
+        localStorage.setItem(likeCountKey, likeCount);
+      });
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- 11 FOODS IN GREECE  -->
+<div class="blog-section" data-page="2" style="display: none;">
+  <div class="blog-posts-wrapper">
+   <div class="blog-post">
+    <a href="foodsingreece.html" class="post-link" id="foodsingreece-preview-post-link">
+      <img src="baklava.jpg" alt= "Foods in Greece Image" class="clickable-preview" />
+    </a>
+
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">September 4</h7>
+      </div>
+    </div>
+
+
+    <a href="foodsingreece.html" class="post-link combined-link">
+      <h2 class="hoverable"> A Taste of Greece: From Savory Souvlaki to Sweet Baklava — Exploring the Heart of Greek Cuisine </h2>
+      <p class="post-preview hoverable">
+        Greek cuisine is more than just a meal—it's a celebration of life, community, and centuries-old traditions.
+        <br><br>
+        Every region, from the sun-soaked islands of the Aegean to the rugged mountains of the mainland, offers...
+      </p>
+    </a>
+
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="foodsingreece-view-count">0</span></span>
+      <span class="metric">
+        <span id="foodsingreece-heart-icon" class="heart">♡</span> <span id="foodsingreece-like-count">0</span>
+      </span>
+     </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+
+  .hoverable {
+    color: black;
+  }
+
+
+  .heart.liked {
+    color: red;
+  }
+
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'foodsingreece-view-count';
+    const likeKey = 'foodsingreece-liked';
+    const likeCountKey = 'foodsingreece-like-count';
+
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("foodsingreece-view-count").innerText = viewCount;
+
+
+    document.getElementById('foodsingreece-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+
+    // Likes
+    const heart = document.getElementById("foodsingreece-heart-icon");
+    const likeCountElem = document.getElementById("foodsingreece-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+   
+    <!-- 12  GREEK CULTURAL -->
+
+
+    <div class="blog-section" data-page="2" style="display: none;">
+      <div class="blog-posts-wrapper">
+       <div class="blog-post">
+        <a href="culturalgreece.html" class="post-link" id="foodsingreece-preview-post-link">
+          <img src="rebetiko.webp" alt= "Cultural Greece Image" class="clickable-preview" />
+        </a>
+   
+        <div class="post-info">
+          <img src="profile1.png" alt="Profile" class="profile-pic" />
+          <div>
+            <h5>Trails Tails</h5>
+            <h7 class="post-date">September 17</h7>
+          </div>
+        </div>
+   
+        <a href="culturalgreece.html" class="post-link combined-link">
+          <h2 class="hoverable"> The Rhythms of Greece: Traditional Dance & Music </h2>
+          <p class="post-preview hoverable">
+            From the lively beats of Syrtos to the soul-stirring sounds of Rebetiko, Greece’s traditional
+            <br><br>
+            music and dance offer a window into its rich cultural soul...
+          </p>
+        </a>
+   
+        <!-- ✅ Engagement Metrics -->
+        <div class="engagement-metrics">
+          <span class="metric">👁 <span id="culturalgreece-view-count">0</span></span>
+          <span class="metric">
+            <span id="culturalgreece-heart-icon" class="heart">♡</span> <span id="culturalgreece-like-count">0</span>
+          </span>
+         </div>
+        </div>
+      </div>
+    </div>
+   
+    <style>
+      .combined-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+   
+      .combined-link:hover .hoverable {
+        color: rgb(247, 109, 109);
+        transition: color 0.2s ease-in-out;
+      }
+   
+      .hoverable {
+        color: black;
+      }
+   
+      .heart.liked {
+        color: red;
+      }
+   
+      .clickable-preview {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+   
+      .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+    </style>
+   
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const viewKey = 'culturalgreece-view-count';
+        const likeKey = 'culturalgreece-liked';
+        const likeCountKey = 'culturalgreece-like-count';
+   
+        // Views
+        let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+        document.getElementById("culturalgreece-view-count").innerText = viewCount;
+   
+        document.getElementById('culturalgreece-preview-post-link').addEventListener('click', function () {
+          viewCount++;
+          localStorage.setItem(viewKey, viewCount);
+        });
+   
+        // Likes
+        const heart = document.getElementById("culturalgreece-heart-icon");
+        const likeCountElem = document.getElementById("culturalgreece-like-count");
+        let liked = localStorage.getItem(likeKey) === 'true';
+        let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+   
+        if (liked) heart.classList.add("liked");
+        likeCountElem.innerText = likeCount;
+   
+        heart.addEventListener("click", function (e) {
+          e.preventDefault();
+          liked = !liked;
+          heart.classList.toggle("liked");
+          likeCount += liked ? 1 : -1;
+          likeCount = Math.max(0, likeCount); // Avoid negatives
+          likeCountElem.innerText = likeCount;
+          localStorage.setItem(likeKey, liked);
+          localStorage.setItem(likeCountKey, likeCount);
+        });
+      });
+    </script>
+
+
+
+
+ <!-- 13 DUBAI-->
+
+
+ <div class="blog-section" data-page="2" style="display: none;">
+  <div class="blog-posts-wrapper">
+   <div class="blog-post">
+    <a href="dubai.html" class="post-link" id="dubai-preview-post-link">
+      <img src="burjkhalifa.jpg" alt= "Dubai Image" class="clickable-preview" />
+    </a>
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">November 10</h7>
+      </div>
+    </div>
+
+    <a href="dubai.html" class="post-link combined-link">
+      <h2 class="hoverable"> Discovering Dubai: The City of Wonders</h2>
+      <p class="post-preview hoverable">
+        Dubai is a destination that seamlessly blends futuristic marvels with rich cultural heritage. 
+        <br><br>
+        Whether you're strolling through...
+      </p>
+    </a>
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="dubai-view-count">0</span></span>
+      <span class="metric">
+        <span id="dubai-heart-icon" class="heart">♡</span> <span id="dubai-like-count">0</span>
+      </span>
+     </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+  .hoverable {
+    color: black;
+  }
+
+  .heart.liked {
+    color: red;
+  }
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'dubai-view-count';
+    const likeKey = 'dubai-liked';
+    const likeCountKey = 'dubai-like-count';
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("dubai-view-count").innerText = viewCount;
+
+    document.getElementById('dubai-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+    // Likes
+    const heart = document.getElementById("dubai-heart-icon");
+    const likeCountElem = document.getElementById("dubai-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+<!-- 14 DUBAI CULTURAL-->
+
+
+<div class="blog-section" data-page="2" style="display: none;">
+  <div class="blog-posts-wrapper">
+   <div class="blog-post">
+    <a href="dubai_culture.html" class="post-link" id="dubai_culture-preview-post-link">
+      <img src="fahidi.jpg" alt= "Dubai Image" class="clickable-preview" />
+    </a>
+
+    <div class="post-info">
+      <img src="profile1.png" alt="Profile" class="profile-pic" />
+      <div>
+        <h5>Trails Tails</h5>
+        <h7 class="post-date">November 22</h7>
+      </div>
+    </div>
+
+    <a href="dubai_culture.html" class="post-link combined-link">
+      <h2 class="hoverable"> Cultural Encounters in Dubai: Traditions & Heritage </h2>
+      <p class="post-preview hoverable">
+        Dubai may be known for luxury, but its deep-rooted traditions and heritage
+        <br><br>
+        make it a fascinating place for...
+      </p>
+    </a>
+
+    <!-- ✅ Engagement Metrics -->
+    <div class="engagement-metrics">
+      <span class="metric">👁 <span id="dubai_culture-view-count">0</span></span>
+      <span class="metric">
+        <span id="dubai_culture-heart-icon" class="heart">♡</span> <span id="dubai_culture-like-count">0</span>
+      </span>
+     </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .combined-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .combined-link:hover .hoverable {
+    color: rgb(247, 109, 109);
+    transition: color 0.2s ease-in-out;
+  }
+
+  .hoverable {
+    color: black;
+  }
+
+  .heart.liked {
+    color: red;
+  }
+
+  .clickable-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewKey = 'dubai_culture-view-count';
+    const likeKey = 'dubai_culture-liked';
+    const likeCountKey = 'dubai_culture-like-count';
+
+    // Views
+    let viewCount = parseInt(localStorage.getItem(viewKey) || 0);
+    document.getElementById("dubai_culture-view-count").innerText = viewCount;
+
+    document.getElementById('dubai_culture-preview-post-link').addEventListener('click', function () {
+      viewCount++;
+      localStorage.setItem(viewKey, viewCount);
+    });
+
+    // Likes
+    const heart = document.getElementById("dubai_culture-heart-icon");
+    const likeCountElem = document.getElementById("dubai_culture-like-count");
+    let liked = localStorage.getItem(likeKey) === 'true';
+    let likeCount = parseInt(localStorage.getItem(likeCountKey) || 0);
+
+    if (liked) heart.classList.add("liked");
+    likeCountElem.innerText = likeCount;
+
+    heart.addEventListener("click", function (e) {
+      e.preventDefault();
+      liked = !liked;
+      heart.classList.toggle("liked");
+      likeCount += liked ? 1 : -1;
+      likeCount = Math.max(0, likeCount); // Avoid negatives
+      likeCountElem.innerText = likeCount;
+      localStorage.setItem(likeKey, liked);
+      localStorage.setItem(likeCountKey, likeCount);
+    });
+  });
+</script>
+
+
+
+
+
+
+   
+    <!-- ✅ Pagination (Separate from Posts) -->
+    <div class="pagination">
+      <a href="#" class="page-link" data-page="1">&lt;</a>
+      <a href="#" class="page-link active" data-page="1">1</a>
+      <a href="#" class="page-link" data-page="2">2</a>
+      <a href="#" class="page-link" data-page="2">&gt;</a>
+  </div>
+  
+   
+
+
+   
+        <!-- Your blog post structure here -->
+   
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+              /** ✅ Fix Home Navigation Click */
+              const homeLink = document.querySelector(".nav-links a[href='index.html']");
+          
+              if (homeLink) {
+                  homeLink.addEventListener("click", function (e) {
+                      e.preventDefault(); // Prevent default navigation
+                      window.location.href = "index.html"; // Redirect to home page
+                  });
+              }
+          
+              /** ✅ Highlight Active Navigation Link */
+              const navLinks = document.querySelectorAll(".nav-links a");
+              const currentPage = window.location.pathname.split("/").pop();
+          
+              navLinks.forEach(link => {
+                  link.classList.remove("active");
+          
+                  if (link.getAttribute("href") === currentPage) {
+                      link.classList.add("active");
+                  }
+              });
+          
+              /** ✅ Track and show view count */
+              let viewCount = localStorage.getItem("view-count") || 0;
+              viewCount++;
+              localStorage.setItem("view-count", viewCount);
+              const viewCountEl = document.getElementById("view-count");
+              if (viewCountEl) viewCountEl.innerText = viewCount;
+          
+              /** ✅ Interactive Likes */
+              const heartIcon = document.getElementById("heart-icon");
+              let liked = localStorage.getItem("liked") === "true";
+          
+              if (liked && heartIcon) {
+                  heartIcon.classList.add("liked");
+              }
+          
+              if (heartIcon) {
+                  heartIcon.addEventListener("click", function () {
+                      liked = !liked;
+                      localStorage.setItem("liked", liked);
+                      heartIcon.classList.toggle("liked");
+          
+                      const likeCountEl = document.getElementById("like-count");
+                      let likeCount = parseInt(likeCountEl.innerText);
+                      likeCountEl.innerText = liked ? likeCount + 1 : likeCount - 1;
+                  });
+              }
+          
+              /** ✅ Pagination Logic */
+              const pageLinks = document.querySelectorAll(".page-link");
+              const blogSections = document.querySelectorAll(".blog-section");
+          
+              // Set correct page from URL on load
+              const urlParams = new URLSearchParams(window.location.search);
+              const initialPage = urlParams.get("page") || "1";
+          
+              function showPage(page) {
+                  blogSections.forEach(section => {
+                      section.style.display = section.getAttribute("data-page") === page ? "flex" : "none";
+                  });
+          
+                  pageLinks.forEach(link => {
+                      link.classList.toggle("active", link.getAttribute("data-page") === page);
+                  });
+          
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  history.pushState({ page: page }, "", `?page=${page}`);
+              }
+          
+              showPage(initialPage);
+          
+              pageLinks.forEach(link => {
+                  link.addEventListener("click", function (e) {
+                      e.preventDefault();
+                      showPage(this.getAttribute("data-page"));
+                  });
+              });
+          
+              window.addEventListener("popstate", function (e) {
+                  showPage((e.state && e.state.page) || "1");
+              });
+          
+              /** ✅ Separate Preview Image from Post Images */
+              const previewImage = document.querySelector(".clickable-preview");
+              const postImages = document.querySelectorAll(".post-image");
+          
+              // ✅ Ensure only the preview image is clickable
+              if (previewImage) {
+                  previewImage.addEventListener("click", function () {
+                      window.location.href = "palawan.html"; // ✅ Redirect to post page
+                  });
+              }
+          
+              // ✅ Allow changing post images dynamically
+              const imageSources = ["new-image1.jpg", "new-image2.jpg", "new-image3.jpg"]; // ✅ Replace with new images
+          
+              postImages.forEach((image, index) => {
+                  image.addEventListener("click", function () {
+                      image.src = imageSources[index]; // ✅ Change image when clicked
+                  });
+              });
+          });
+          </script>
+          
+          
+          
+          
+          
+          
+</body>
+
+
+</body>
+</html>
